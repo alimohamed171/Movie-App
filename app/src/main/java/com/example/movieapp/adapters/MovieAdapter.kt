@@ -11,11 +11,11 @@ import com.example.movieapp.R
 import com.example.movieapp.models.MovieModel
 import com.example.movieapp.models.Result
 
-class MovieAdapter(
+class MovieAdapter(private val onItemClick: (position: Int) -> Unit
 
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
-     lateinit var movies : MovieModel
+     lateinit var movies : List<Result>
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -24,17 +24,28 @@ class MovieAdapter(
         )
     }
 
-    override fun getItemCount(): Int = movies.results.size
+    override fun getItemCount(): Int = movies.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindMovie(movies.results.get(position))
+        holder.bindMovie(movies.get(position))
     }
 
 
 
 
 
-    class MovieViewHolder(view : View) : RecyclerView.ViewHolder(view){
+  inner class MovieViewHolder(view : View) : RecyclerView.ViewHolder(view){
+
+
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClick(position)
+                }
+            }
+        }
+
 
         private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
         lateinit var title: TextView
@@ -51,11 +62,9 @@ class MovieAdapter(
             title.text = movie.title
             vote.text = movie.vote_average.toString()
             details.text=movie.overview
-           // itemView.movie_release_date.text = movie.release
+
             Glide.with(itemView).load(IMAGE_BASE + movie.poster_path)
                 .into(poster)
-
-
 
         }
 

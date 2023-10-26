@@ -1,10 +1,13 @@
 package com.example.movieapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.movieapp.adapters.MovieAdapter
 import com.example.movieapp.databinding.ActivityMainBinding
 import com.example.movieapp.models.MovieModel
+import com.example.movieapp.models.Result
 import com.example.movieapp.network.ApiCalls
 import com.example.movieapp.network.RetroConnection
 import retrofit2.Call
@@ -14,7 +17,30 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    val adapter: MovieAdapter = MovieAdapter()
+
+    lateinit var _movies : List<Result>
+
+
+    val adapter: MovieAdapter = MovieAdapter{ position: Int ->
+
+
+        val intent = Intent(this, DetailsActivity::class.java)
+
+        intent.putExtra("title",_movies.get(position).title)
+        intent.putExtra("overview",_movies.get(position).overview)
+        intent.putExtra("voteCount",_movies.get(position).vote_count)
+        intent.putExtra("language",_movies.get(position).original_language)
+        intent.putExtra("voteAverage",_movies.get(position).vote_average)
+        intent.putExtra("posterPath",_movies.get(position).poster_path )
+
+
+      startActivity(intent)
+
+    }
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,9 +50,11 @@ class MainActivity : AppCompatActivity() {
 
         getMovieData { movies : MovieModel ->
 
-            adapter.movies = movies
+            _movies = movies.results
+            adapter.movies = movies.results
             binding.rvMoviesList.adapter = adapter
         }
+
 
 
     }
