@@ -21,7 +21,7 @@ class MovieAdapter(private val onItemClick: (position: Int) -> Unit
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.movieeee_item, parent, false)
         )
     }
 
@@ -58,11 +58,11 @@ class MovieAdapter(private val onItemClick: (position: Int) -> Unit
         fun bindMovie(movie : Result){
             title = itemView.findViewById(R.id.movie_title)
             vote = itemView.findViewById(R.id.movie_release_date)
-            details = itemView.findViewById(R.id.details)
+
             poster = itemView.findViewById(R.id.movie_poster)
             title.text = movie.title
             vote.text = movie.vote_average.toString()
-            details.text=movie.overview
+
 
             Glide.with(itemView).load(IMAGE_BASE + movie.poster_path)
                 .into(poster)

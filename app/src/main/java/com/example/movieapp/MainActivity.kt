@@ -10,6 +10,7 @@ import com.example.movieapp.models.Genre
 import com.example.movieapp.models.GenreModel
 import com.example.movieapp.models.MovieModel
 import com.example.movieapp.models.Result
+import com.example.movieapp.models._movies
 import com.example.movieapp.models.genreList
 import com.example.movieapp.network.ApiCalls
 import com.example.movieapp.network.RetroConnection
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-    lateinit var _movies : List<Result>
+
 
 
     val apiService = RetroConnection.retrofit.create(ApiCalls::class.java)
@@ -31,12 +32,13 @@ class MainActivity : AppCompatActivity() {
 
         val intent = Intent(this, DetailsActivity::class.java)
 
-        intent.putExtra("title",_movies.get(position).title)
-        intent.putExtra("overview",_movies.get(position).overview)
-        intent.putExtra("voteCount",_movies.get(position).vote_count)
-        intent.putExtra("language",_movies.get(position).original_language)
-        intent.putExtra("voteAverage",_movies.get(position).vote_average)
-        intent.putExtra("posterPath",_movies.get(position).poster_path )
+//        intent.putExtra("title",_movies.get(position).title)
+//        intent.putExtra("overview",_movies.get(position).overview)
+//        intent.putExtra("voteCount",_movies.get(position).vote_count)
+//        intent.putExtra("language",_movies.get(position).original_language)
+//        intent.putExtra("voteAverage",_movies.get(position).vote_average)
+//        intent.putExtra("posterPath",_movies.get(position).poster_path )
+        intent.putExtra("postion",position)
 
 
       startActivity(intent)
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
         getGenres {
             genreList = it.genres
-            
+
         }
 
 
