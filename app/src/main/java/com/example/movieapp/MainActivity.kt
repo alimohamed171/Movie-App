@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.movieapp.adapters.MovieAdapter
 import com.example.movieapp.databinding.ActivityMainBinding
+import com.example.movieapp.models.Genre
+import com.example.movieapp.models.GenreModel
 import com.example.movieapp.models.MovieModel
 import com.example.movieapp.models.Result
+import com.example.movieapp.models.genreList
 import com.example.movieapp.network.ApiCalls
 import com.example.movieapp.network.RetroConnection
 import retrofit2.Call
@@ -20,6 +23,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var _movies : List<Result>
 
+
+    val apiService = RetroConnection.retrofit.create(ApiCalls::class.java)
 
     val adapter: MovieAdapter = MovieAdapter{ position: Int ->
 
@@ -54,6 +59,10 @@ class MainActivity : AppCompatActivity() {
             adapter.movies = movies.results
             binding.rvMoviesList.adapter = adapter
         }
+        getGenres {
+            genreList = it.genres
+            
+        }
 
 
 
@@ -62,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getMovieData(callback: (MovieModel) -> Unit){
 
-        val apiService = RetroConnection.retrofit.create(ApiCalls::class.java)
+
         apiService.getMovie().enqueue(object : Callback<MovieModel> {
             override fun onFailure(call: Call<MovieModel>, t: Throwable) {
 
@@ -75,28 +84,32 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
+    private fun getGenres(callback: (GenreModel) -> Unit){
+
+        apiService.getGenre().enqueue(object : Callback<GenreModel>{
+            override fun onResponse(call: Call<GenreModel>, response: Response<GenreModel>) {
+                return callback(response.body()!!)
+            }
+
+            override fun onFailure(call: Call<GenreModel>, t: Throwable) {
+                  Toast.makeText(applicationContext,"failed",Toast.LENGTH_LONG).show()
+            }
+
+
+        })
+    }
+
+
+
+
+
+
+
+
+
 }
 
 
 
 
-//rv_movies_list.layoutManager = LinearLayoutManager(this)
-//rv_movies_list.setHasFixedSize(true)
-//getMovieData { movies : List<Movie> ->
-//    rv_movies_list.adapter = MovieAdapter(movies)
-//}
-//}
-//
-//private fun getMovieData(callback: (List<Movie>) -> Unit){
-//    val apiService = MovieApiService.getInstance().create(MovieApiInterface::class.java)
-//    apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
-//        override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-//
-//        }
-//
-//        override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-//            return callback(response.body()!!.movies)
-//        }
-//
-//    })
-//}

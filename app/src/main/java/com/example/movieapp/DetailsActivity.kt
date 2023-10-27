@@ -5,11 +5,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.ActivityDetailsBinding
+import com.example.movieapp.models.IMAGE_BASE
 import com.example.movieapp.models.MovieModel
 
 class DetailsActivity : AppCompatActivity() {
     private lateinit var binding:ActivityDetailsBinding
-    private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +22,7 @@ class DetailsActivity : AppCompatActivity() {
     val language = intent.getStringExtra("language")
     val voteAverage = intent.getDoubleExtra("voteAverage", 0.0)
     val posterPath = intent.getStringExtra("posterPath")
+
 
         binding.textView2.text = title
         Glide.with(this)

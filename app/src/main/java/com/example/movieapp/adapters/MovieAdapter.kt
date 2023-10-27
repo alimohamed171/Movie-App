@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
+import com.example.movieapp.models.IMAGE_BASE
 import com.example.movieapp.models.MovieModel
 import com.example.movieapp.models.Result
 
@@ -47,7 +48,7 @@ class MovieAdapter(private val onItemClick: (position: Int) -> Unit
         }
 
 
-        private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
+       // private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
         lateinit var title: TextView
         lateinit var vote: TextView
         lateinit var details: TextView
