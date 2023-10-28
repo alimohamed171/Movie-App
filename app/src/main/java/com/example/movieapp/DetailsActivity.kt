@@ -14,26 +14,27 @@ class DetailsActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityDetailsBinding
     private lateinit var selectedGenres : String
-    private lateinit var genreIds : List<Int>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val position = intent.getIntExtra("position",0)
-        genreIds = _movies.get(position).genre_ids
 
-        mapGenres()
+
+        mapGenres(position)
         initUI(position)
     }
 
 
 
-    private fun mapGenres(){
+    private fun mapGenres(position:Int){
+
+         val genreIds = _movies[position].genre_ids
          selectedGenres = genreList
             .filter { it.id in genreIds }
             .map { it.name }
-            .joinToString(" / ")
+            .joinToString(" ")
 
     }
 
