@@ -1,5 +1,8 @@
-package com.example.movieapp.models
+package com.example.movieapp.data.models
 
+import androidx.room.Entity
+
+@Entity(tableName = "MOVIE_TABLE")
 data class MovieModel(
     val page: Int,
     val results: List<Result>,

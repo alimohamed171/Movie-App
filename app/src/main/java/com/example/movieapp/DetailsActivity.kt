@@ -5,10 +5,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.ActivityDetailsBinding
-import com.example.movieapp.models.IMAGE_BASE
-import com.example.movieapp.models.MovieModel
-import com.example.movieapp.models._movies
-import com.example.movieapp.models.genreList
+import com.example.movieapp.data.models.IMAGE_BASE
+import com.example.movieapp.data.models.MovieModel
+import com.example.movieapp.data.models._movies
+import com.example.movieapp.data.models.genreList
 
 class DetailsActivity : AppCompatActivity() {
 

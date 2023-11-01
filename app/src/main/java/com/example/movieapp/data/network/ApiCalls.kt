@@ -1,7 +1,7 @@
-package com.example.movieapp.network
+package com.example.movieapp.data.network
 
-import com.example.movieapp.models.GenreModel
-import com.example.movieapp.models.MovieModel
+import com.example.movieapp.data.models.GenreModel
+import com.example.movieapp.data.models.MovieModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

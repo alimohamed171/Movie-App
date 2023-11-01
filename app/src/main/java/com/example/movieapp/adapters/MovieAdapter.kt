@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.R
-import com.example.movieapp.models.IMAGE_BASE
-import com.example.movieapp.models.MovieModel
-import com.example.movieapp.models.Result
+import com.example.movieapp.data.models.IMAGE_BASE
+import com.example.movieapp.data.models.MovieModel
+import com.example.movieapp.data.models.Result
 
 class MovieAdapter(private val onItemClick: (position: Int) -> Unit
 
