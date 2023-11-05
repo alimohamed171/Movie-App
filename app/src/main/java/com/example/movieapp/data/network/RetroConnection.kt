@@ -9,4 +9,6 @@ object RetroConnection {
         .baseUrl("https://api.themoviedb.org/3/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+
+    val apiCalls = retrofit.create(ApiCalls::class.java)
 }

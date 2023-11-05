@@ -2,14 +2,13 @@ package com.example.movieapp.data.models
 
 import androidx.room.Entity
 
-@Entity(tableName = "MOVIE_TABLE")
+
 data class MovieModel(
     val page: Int,
     val results: List<Result>,
     val total_pages: Int,
     val total_results: Int
 )
-
 data class Result(
     val adult: Boolean,
     val backdrop_path: String,
